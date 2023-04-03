@@ -18,7 +18,7 @@ def cat(img):
     blob = bucket.blob(img)
     with tempfile.NamedTemporaryFile() as temp:
         blob.download_to_filename(temp.name)
-        return flask.send_file(temp.name, attachment_filename=img)
+        return flask.send_file(temp.name, download_name=img)
 
 
 def get_cats(bucket):
@@ -39,6 +39,7 @@ def get_cats(bucket):
 
     cats = []
     for img in images:
+        # resp returns response from cloud functions
         resp = requests.get(
             FUNCTION_NAME,
             params={"bucket": BUCKET_NAME, "resource": img.name},
