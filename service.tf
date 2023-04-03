@@ -57,7 +57,4 @@ output "latest_tag_output1" {
   value = data.external.image_digest.result
 }
 
-output "latest_tag_output2" {
-  value = data.external.image_digest.result.stdout
-}
 # END WORKAROUND
