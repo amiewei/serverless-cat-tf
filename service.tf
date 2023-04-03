@@ -8,7 +8,8 @@ resource "google_cloud_run_service" "cats" {
     spec {
       service_account_name = google_service_account.cats_worker.email
       containers {
-        image = data.external.image_digest.result.image
+        # image = data.external.image_digest.result.image
+        image = "gcr.io/i-portfolio-363516/cats:latest"
         env {
           name  = "BUCKET_NAME"
           value = google_storage_bucket.media.name
