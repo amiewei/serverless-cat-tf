@@ -50,10 +50,14 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 
 # WORKAROUND 
 data "external" "image_digest" {
-  program = ["bash", "scripts/get_latest_tag.sh", var.project, local.service_name]
+  program = ["bash", "./scripts/get_latest_tag.sh", var.project, local.service_name]
 }
 
-output "latest_tag_output" {
+output "latest_tag_output1" {
+  value = data.external.image_digest.result
+}
+
+output "latest_tag_output2" {
   value = data.external.image_digest.result.stdout
 }
 # END WORKAROUND
